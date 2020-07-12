@@ -1,0 +1,1 @@
+export const INCREMENT_INDEX = 'INCREMENT_INDEX';
