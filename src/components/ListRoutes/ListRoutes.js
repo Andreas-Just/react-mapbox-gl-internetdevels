@@ -1,70 +1,61 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import AddIcon from '@material-ui/icons/Add';
-import ListIcon from '@material-ui/icons/List';
-import ListAltIcon from '@material-ui/icons/ListAlt';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import * as icons from '@material-ui/icons';
 import { useStyles } from './ListRoutesStyle';
-import { historyLocation } from '../../store/location';
-import { HOME, ABOUT, SETTINGS } from '../../constants/linkName';
+
+export const listConfig = [
+  {
+    id: 1,
+    name: 'Map',
+    to: '/',
+  },
+  {
+    id: 2,
+    name: 'About',
+    to: '/about',
+  },
+  {
+    id: 3,
+    name: 'Settings',
+    to: '/settings',
+  },
+];
+
+export const setHeadingAndIcon = (to) => {
+  switch (to) {
+    case '/':
+      return ['Map', <icons.Map />];
+    case '/about':
+      return ['About', <icons.Info />];
+    case '/settings':
+      return ['Settings', <icons.Settings />];
+    default:
+      return ['Error', <icons.Error />];
+  }
+};
 
 const ListRoutes = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
   const classes = useStyles();
-
-  useEffect(() => {
-    dispatch(historyLocation(history.location.pathname));
-  }, [history, dispatch]);
 
   return (
     <List>
-      <ListItem
-        to="/"
-        button
-        component={Link}
-        onClick={() => dispatch(historyLocation('/'))}
-      >
-        <ListItemIcon className={classes.listItemIcon}>
-          <ListIcon />
-        </ListItemIcon>
-        <ListItemText
-          primary={HOME}
-          className={classes.listItemText}
-        />
-      </ListItem>
-      <ListItem
-        to="/about"
-        button
-        component={Link}
-        onClick={() => dispatch(historyLocation('/about'))}
-      >
-        <ListItemIcon className={classes.listItemIcon}>
-          <AddIcon />
-        </ListItemIcon>
-        <ListItemText
-          primary={ABOUT}
-          className={classes.listItemText}
-        />
-      </ListItem>
-      <ListItem
-        to="/settings"
-        button
-        component={Link}
-        onClick={() => dispatch(historyLocation('/settings'))}
-      >
-        <ListItemIcon className={classes.listItemIcon}>
-          <ListAltIcon />
-        </ListItemIcon>
-        <ListItemText
-          primary={SETTINGS}
-          className={classes.listItemText}
-        />
-      </ListItem>
+      {listConfig.map(({ id, name, to }) => (
+        <ListItem
+          key={id}
+          to={to}
+          button
+          component={Link}
+        >
+          <ListItemIcon className={classes.listItemIcon}>
+            {setHeadingAndIcon(to)[1]}
+          </ListItemIcon>
+          <ListItemText
+            primary={name}
+            className={classes.listItemText}
+          />
+        </ListItem>
+      ))}
     </List>
   );
 };

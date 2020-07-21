@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import MapPage from './pages/MapPage';
 import AboutPage from './pages/AboutPage';
 import LoadingPage from './pages/LoadingPage';
+import ErrorPage from './pages/ErrorPage';
 
 export const useRoutes = () => (
   <Switch>
@@ -10,14 +11,17 @@ export const useRoutes = () => (
       <MapPage />
     </Route>
 
-    <Route path="/about">
+    <Route path="/about" exact>
       <AboutPage />
     </Route>
 
-    <Route path="/settings">
+    <Route path="/settings" exact>
       <LoadingPage />
     </Route>
 
-    <Redirect to="/" />
+    <Route path="/error">
+      <ErrorPage message="Not found" />
+    </Route>
+    <Redirect from="/*" to="/error" />
   </Switch>
 );

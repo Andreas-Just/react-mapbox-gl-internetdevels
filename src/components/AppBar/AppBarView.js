@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-import Toolbar from '@material-ui/core/Toolbar';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, IconButton, Toolbar } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
 import { useStyles } from './AppBarStyle';
-import { getLocation } from '../../store/selectors';
+import { getHeading } from '../../store/selectors';
+import { setHeading } from '../../store/heading';
 
 const AppBarView = ({
   isOpen,
   handleDrawer,
 }) => {
-  const location = useSelector(getLocation);
+  const heading = useSelector(getHeading);
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(setHeading(history.location.pathname));
+  }, [history, dispatch, location]);
 
   return (
     <AppBar
@@ -31,10 +38,10 @@ const AppBarView = ({
           onClick={() => handleDrawer(isOpen)}
           className={clsx(classes.menuButton, isOpen && classes.hide)}
         >
-          <MenuIcon />
+          <Menu />
         </IconButton>
         <h2 className={classes.appText}>
-          {location}
+          {heading}
         </h2>
       </Toolbar>
     </AppBar>
