@@ -3,11 +3,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import loadingReducer from './loading';
-import locationReducer from './location';
+import headingReducer from './heading';
 
 export const rootReducer = combineReducers({
   loading: loadingReducer,
-  location: locationReducer,
+  heading: headingReducer,
 });
 
 const store = createStore(
