@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import MapPage from './pages/MapPage';
 import AboutPage from './pages/AboutPage';
-import LoadingPage from './pages/LoadingPage';
+import SettingsPage from './pages/SettingsPage';
 import ErrorPage from './pages/ErrorPage';
 
 export const useRoutes = () => (
@@ -16,7 +16,7 @@ export const useRoutes = () => (
     </Route>
 
     <Route path="/settings" exact>
-      <LoadingPage />
+      <SettingsPage />
     </Route>
 
     <Route path="/error">

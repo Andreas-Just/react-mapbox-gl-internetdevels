@@ -1,9 +1,9 @@
 import React from 'react';
+import { CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 
-const LoadingPage = () => {
+export const Loading = () => {
   const classes = useStyles();
 
   return (
@@ -12,8 +12,6 @@ const LoadingPage = () => {
     </Box>
   );
 };
-
-export default LoadingPage;
 
 const useStyles = makeStyles({
   spinner: {

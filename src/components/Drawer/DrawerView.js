@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import { Drawer, Divider, IconButton } from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
-import { useStyles } from './DrawerStyle';
 import ListRoutes from '../ListRoutes';
+import { useStyles } from './DrawerStyle';
 
 const DrawerView = ({ isOpen, handleDrawer }) => {
   const classes = useStyles();
